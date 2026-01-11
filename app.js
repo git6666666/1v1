@@ -43,7 +43,7 @@ const CATEGORY_PROFILES = {
       { key: "cpu", label: "CPU", weight: 0.30 },
       { key: "price", label: "价格", weight: 0.30 },
       { key: "year", label: "时间", weight: 0.20 },
-      { key: "battery", label: "电池容量", weight: 0.10 }
+      { key: "battery", label: "电池容量", weight: 0.20 }
       
     ]
   },
