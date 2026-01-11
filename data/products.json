@@ -17,16 +17,18 @@
     ]
   },
   {
-    "id": "8550u",
-    "name": "8550U",
-    "category": "cpu",
-    "brand": "Intel",
-    "year": 2017,
-    "aliases": ["8550"],
-    "desc": "i7八代",
+    "id": "z10turbo+",
+    "name": "z10turbo+",
+    "category": "phone",
+    "brand": "vivo",
+    "year": 2025,
+    "aliases": ["z10"],
+    "desc": "z10",
     "metrics": [
-      { "key": "page_loads", "label": "网页打开数", "value": 78 },
-      { "key": "year", "label": "年份", "value": 2017 }
+      { "key": "cpu", "label": "CPU", "value": 9400+ },
+      { "key": "price", "label": "价格", "value": 1700 },
+      { "key": "battery", "label": "电池", "value": 8000 },
+      { "key": "year", "label": "年份", "value": 2025 }
     ]
   },
   {
