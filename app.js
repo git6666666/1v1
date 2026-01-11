@@ -40,11 +40,11 @@ const CATEGORY_PROFILES = {
   phone: {
     label: "手机",
     coreMetrics: [
-      { key: "geek6_sc", label: "Geekbench 6 单核", weight: 0.30 },
-      { key: "geek6_mc", label: "Geekbench 6 多核", weight: 0.30 },
-      { key: "gpu_score", label: "GPU 跑分", weight: 0.20 },
-      { key: "battery", label: "电池容量", weight: 0.10 },
-      { key: "weight", label: "重量", weight: 0.10 }
+      { key: "cpu", label: "CPU", weight: 0.30 },
+      { key: "price", label: "价格", weight: 0.30 },
+      { key: "year", label: "时间", weight: 0.20 },
+      { key: "battery", label: "电池容量", weight: 0.10 }
+      
     ]
   },
   car: {
