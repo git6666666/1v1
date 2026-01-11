@@ -1,0 +1,71 @@
+[
+  {
+    "id": "gpu_rtx_4070",
+    "name": "NVIDIA GeForce RTX 4070",
+    "brand": "NVIDIA",
+    "year": 2023,
+    "category": "pc_part",
+    "desc": "桌面显卡（示例数据）",
+    "aliases": ["4070", "rtx4070", "ada4070", "geforce 4070"],
+    "keywords": ["3dmark", "dlss", "ray tracing", "nvidia"],
+    "metrics": [
+      { "key": "fp32_tflops", "label": "FP32 算力", "value": 29.1, "unit": "TFLOPS", "higherBetter": true },
+      { "key": "vram", "label": "显存容量", "value": 12, "unit": "GB", "higherBetter": true },
+      { "key": "mem_bw", "label": "显存带宽", "value": 504, "unit": "GB/s", "higherBetter": true },
+      { "key": "tbp", "label": "功耗(TBP)", "value": 200, "unit": "W", "higherBetter": false },
+      { "key": "3dmark_ts", "label": "3DMark Time Spy", "value": 17500, "unit": "分", "higherBetter": true }
+    ]
+  },
+  {
+    "id": "8550u",
+    "name": "8550U",
+    "category": "cpu",
+    "brand": "Intel",
+    "year": 2017,
+    "aliases": ["8550"],
+    "desc": "i7八代",
+    "metrics": [
+      { "key": "page_loads", "label": "网页打开数", "value": 78 },
+      { "key": "year", "label": "年份", "value": 2017 }
+    ]
+  },
+  {
+    "id": "m5",
+    "name": "m5",
+    "category": "cpu",
+    "brand": "Apple",
+    "year": 2025,
+    "aliases": ["m", "m5"],
+    "desc": "m五代",
+    "metrics": [
+      { "key": "page_loads", "label": "网页打开数", "value": 412 },
+      { "key": "year", "label": "年份", "value": 2025 }
+    ]
+  },
+  {
+    "id": "tharu",
+    "name": "途岳",
+    "brand": "大众",
+    "category": "car",
+    "aliases": ["途岳", "大众途岳"],
+    "keywords": ["销量", "价格", "大众"],
+    "metrics": [
+      { "key": "sales", "label": "销量", "value": 12634,  "higherBetter": true },
+      { "key": "price", "label": "价格", "value": 80000,  "higherBetter": false }
+      
+    ]
+  },
+  {
+    "id": "rav4",
+    "name": "rav4荣放",
+    "brand": "丰田",
+    "category": "car",
+    "aliases": ["rav4", "rav4荣放"],
+    "keywords": ["销量", "价格", "丰田"],
+    "metrics": [
+      { "key": "sales", "label": "销量", "value": 19252,  "higherBetter": true },
+      { "key": "price", "label": "价格", "value": 129800,  "higherBetter": false }
+      
+    ]
+  }
+]

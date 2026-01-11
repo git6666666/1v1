@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1v1 性能对比 · Performance Arena</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- 动态背景层 -->
+  <div class="bg">
+    <div class="grid"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="container header">
+    <div class="titleBlock">
+      <div class="kicker">PERFORMANCE ARENA</div>
+      <h1>1v1 性能对比</h1>
+      <p class="sub">
+        面向性能党：同品类综合分（权重）+ 雷达图 + 指标条形对比。支持电脑配件 / 手机 / 汽车 / 电子产品。
+      </p>
+    </div>
+
+    <div class="statusPill">
+      <span class="dot"></span>
+      <span id="statusText">正在加载数据…</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 控制面板 -->
+    <section class="panel">
+      <div class="controls">
+        <div class="control">
+          <label>品类</label>
+          <select id="categorySelect">
+            <option value="all">全部</option>
+            <option value="pc_part">电脑配件</option>
+            <option value="cpu">CPU</option>
+            <option value="phone">手机</option>
+            <option value="car">汽车</option>
+            <option value="electronics">电子产品</option>
+          </select>
+          <small class="hint">性能分与归一化只对同品类计算，建议先选品类。</small>
+        </div>
+
+        <div class="control">
+          <label>产品 A（强搜索）</label>
+          <input id="inputA" type="text" placeholder="支持别名/关键词/模糊：如 4070 / 7800xt / iPhone / Model 3" autocomplete="off" />
+          <div id="suggestA" class="suggest"></div>
+          <div class="rowBtns">
+            <button id="confirmA" class="btn primary">确认 A</button>
+            <button id="randomA" class="btn ghost">随机 A</button>
+          </div>
+          <small id="pickedA" class="picked dim">未选择</small>
+        </div>
+
+        <div class="control">
+          <label>产品 B（强搜索）</label>
+          <input id="inputB" type="text" placeholder="支持别名/关键词/模糊：如 s24 / 15pro / camry / ps5" autocomplete="off" />
+          <div id="suggestB" class="suggest"></div>
+          <div class="rowBtns">
+            <button id="confirmB" class="btn primary">确认 B</button>
+            <button id="randomB" class="btn ghost">随机 B</button>
+          </div>
+          <small id="pickedB" class="picked dim">未选择</small>
+        </div>
+
+        <div class="control">
+          <label>对比设置</label>
+          <div class="toggles">
+            <label class="toggle">
+              <input id="toggleRaw" type="checkbox" />
+              <span>显示原始值</span>
+            </label>
+            <label class="toggle">
+              <input id="toggleOnlyProfile" type="checkbox" checked />
+              <span>仅显示核心指标</span>
+            </label>
+          </div>
+          <div class="rowBtns">
+            <button id="swapBtn" class="btn">A/B 互换</button>
+            <button id="clearBtn" class="btn danger">清空</button>
+          </div>
+          <small class="hint">核心指标由“品类性能档案”决定，可在 app.js 中改权重。</small>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 专栏模块：插在控制面板后、对比结果前 -->
+    <section id="columnSection" class="panel">
+    <div class="columnTop">
+        <div>
+        <div class="kicker smallKicker">COLUMN</div>
+        <h2 class="columnTitle">专栏快讯（≤200字）</h2>
+        <p class="sub">不定期更新：方法论、指标解释、性能趋势。点击卡片阅读/分享。</p>
+        </div>
+
+        <div class="columnActions">
+        <select id="tagFilter" aria-label="筛选标签">
+            <option value="all">全部标签</option>
+        </select>
+        <button id="copyColumnLink" class="btn ghost">复制专栏入口链接</button>
+        </div>
+    </div>
+
+    <div id="columnList" class="columnGrid">
+        <!-- JS 渲染专栏卡片 -->
+    </div>
+
+    <div class="columnFoot">
+        <span class="badge" id="columnHint">提示：编辑 data/columns.json 即可更新主页专栏。</span>
+    </div>
+    </section>
+
+    <!-- 阅读弹窗（Modal） -->
+    <div id="postModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="阅读专栏">
+    <div class="modalBackdrop" id="modalBackdrop"></div>
+    <div class="modalPanel">
+        <div class="modalHeader">
+        <div>
+            <div class="modalMeta" id="modalMeta">—</div>
+            <div class="modalTitle" id="modalTitle">—</div>
+        </div>
+        <button id="closeModal" class="iconBtn" aria-label="关闭">✕</button>
+        </div>
+
+        <div class="modalBody" id="modalBody"></div>
+
+        <div class="modalFooter">
+        <button id="copyPostLink" class="btn primary">复制本文链接</button>
+        <button id="closeModal2" class="btn">关闭</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- 对比结果 -->
+    <section id="compareSection" class="panel hidden">
+      <div class="compareTop">
+        <div>
+          <h2>对比结果</h2>
+          <p class="sub" id="compareSubtitle"></p>
+        </div>
+
+        <div class="scoreBoard">
+          <div class="scoreBox" id="scoreABox">
+            <div class="scoreLabel">A 综合性能分</div>
+            <div class="scoreValue" id="scoreA">—</div>
+          </div>
+          <div class="vs">VS</div>
+          <div class="scoreBox" id="scoreBBox">
+            <div class="scoreLabel">B 综合性能分</div>
+            <div class="scoreValue" id="scoreB">—</div>
+          </div>
+          <div class="winner" id="winnerText">等待生成…</div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card" id="cardA"></article>
+        <article class="card" id="cardB"></article>
+      </div>
+      <!--
+      <div class="charts">
+        <div class="chartPanel radarPanel">
+          <div class="chartTitle">
+            <h3>核心指标雷达图（归一化 0-100）</h3>
+            <span class="badge" id="radarBadge">—</span>
+          </div>
+          <canvas id="radarChart" height="160"></canvas>
+        </div>
+
+        <div class="chartPanel">
+          <div class="chartTitle">
+            <h3>核心指标条形对比（归一化 0-100）</h3>
+            <span class="badge">越长越强（越低越好指标已反向处理）</span>
+          </div>
+          <div id="metricList" class="metricList"></div>
+          <p class="footnote">
+            归一化：同品类内 min-max 计算；higherBetter=false 会反向处理（例如功耗、重量、0-100 加速时间）。
+          </p>
+        </div>
+        -->
+      </div>
+    </section>
+
+    <section class="panel">
+      <details>
+        <summary>如何让搜索更强？（点开）</summary>
+        <p>
+          给每个产品增加 <code>aliases</code>（别名）和 <code>keywords</code>（关键词），例如：
+          <code>["4070", "Ada", "RTX4070"]</code>、<code>["3dmark", "nvidia", "dlss"]</code>。
+          Fuse.js 会自动把它们纳入搜索。
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="year"></span> Performance Arena · Static GitHub Pages</p>
+  </footer>
+
+  <!-- 强搜索：Fuse.js -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <!-- 漂亮图表：Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+
+  <script src="./app.js"></script>
+</body>
+</html>
