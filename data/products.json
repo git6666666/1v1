@@ -50,7 +50,7 @@
     "category": "cpu",
     "brand": "Apple",
     "year": 2011,
-    "aliases": ["m", "m5", "apple"],
+    "aliases": ["m", "apple"],
     "desc": "m一代",
     "metrics": [
       { "key": "page_loads", "label": "网页打开数", "value": 204 },
@@ -62,12 +62,12 @@
     "name": "m5",
     "category": "cpu",
     "brand": "Apple",
-    "year": 2025,
+    "year": 2510,
     "aliases": ["m", "m5"],
     "desc": "m五代",
     "metrics": [
       { "key": "page_loads", "label": "网页打开数", "value": 412 },
-      { "key": "year", "label": "年份", "value": 2025 }
+      { "key": "year", "label": "年份", "value": 2510 }
     ]
   },
   {
