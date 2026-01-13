@@ -45,6 +45,19 @@
     ]
   },
   {
+    "id": "m1",
+    "name": "m1",
+    "category": "cpu",
+    "brand": "Apple",
+    "year": 2011,
+    "aliases": ["m", "m5", "apple"],
+    "desc": "m一代",
+    "metrics": [
+      { "key": "page_loads", "label": "网页打开数", "value": 204 },
+      { "key": "year", "label": "年份", "value": 2011 }
+    ]
+  },
+  {
     "id": "m5",
     "name": "m5",
     "category": "cpu",
